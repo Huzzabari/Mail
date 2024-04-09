@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
   document.querySelector('#compose').addEventListener('click', compose_email);
   // send mail
   document.querySelector('#send').addEventListener('click', (event) => {
-    event.preventDefault()
+    console.log("clicked");
+    event.preventDefault();
     send_mail();
   });
   // By default, load the inbox
