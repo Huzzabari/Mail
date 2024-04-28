@@ -28,14 +28,34 @@ function compose_email() {
 }
 
 function load_mailbox(mailbox) {
-  
   // Show the mailbox and hide other views
   document.querySelector('#emails-view').style.display = 'block';
   document.querySelector('#compose-view').style.display = 'none';
 
   // Show the mailbox name
   document.querySelector('#emails-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
+
+
+  // fetch mailbox 
+  fetch('/emails/'+mailbox)
+  .then(response => response.json())
+  .then(emails => {
+    attach=document.querySelector("#emails-view")             // NOT DONE.  JUST WHAT I'M TRYING OUT
+      for (let email of emails){
+        let li=document.createElement('li');
+        li.textContent=email.sender;
+        attach.append(li);
+      };
+  })
+  .catch(error => {
+      console.error('Error:', error);
+  });
+
+
 }
+
+
+
 
 
 // send mail
@@ -53,3 +73,5 @@ function send_mail(){
   .then(result => {console.log(result);})
   .then(() => load_mailbox('sent'));
 }
+
+
