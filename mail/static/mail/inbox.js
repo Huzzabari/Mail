@@ -40,11 +40,42 @@ function load_mailbox(mailbox) {
   fetch('/emails/'+mailbox)
   .then(response => response.json())
   .then(emails => {
-    attach=document.querySelector("#emails-view")             // NOT DONE.  JUST WHAT I'M TRYING OUT
+    email_list=document.querySelector("#emails-view")             // NOT DONE.  JUST WHAT I'M TRYING OUT
+    console.log(emails);
       for (let email of emails){
-        let li=document.createElement('li');
-        li.textContent=email.sender;
-        attach.append(li);
+        let div=document.createElement('div');
+        if (email.read==true){
+          div.className="emailClassGrey";
+
+        let senderDiv = document.createElement('div');
+        senderDiv.textContent = "from: " + email.sender;
+       
+        let subjectDiv = document.createElement('div');
+        subjectDiv.textContent = "subject: " + email.subject;
+
+
+        let timestampDiv = document.createElement('div');
+        timestampDiv.textContent = "timestamp: " + email.timestamp;
+        
+        div.append(senderDiv, subjectDiv, timestampDiv);
+        email_list.append(div);
+        }
+        else{
+          div.className="emailClassWhite";
+
+          let senderDiv = document.createElement('div');
+          senderDiv.textContent = "from: " + email.sender;
+         
+          let subjectDiv = document.createElement('div');
+          subjectDiv.textContent = "subject: " + email.subject;
+  
+  
+          let timestampDiv = document.createElement('div');
+          timestampDiv.textContent = "timestamp: " + email.timestamp;
+          
+          div.append(senderDiv, subjectDiv, timestampDiv);
+          email_list.append(div);
+        }
       };
   })
   .catch(error => {
