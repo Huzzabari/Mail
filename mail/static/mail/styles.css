@@ -31,3 +31,19 @@ textarea {
     padding: 10px;
     padding-right: 140px;
 }
+
+
+.email_body{
+    border-top: 4px solid blue;
+    padding: 10px;
+}
+
+
+.email_body > p{
+    
+    padding-top: 100px;
+}
+
+button {
+    margin: 10px;
+}
