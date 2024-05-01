@@ -131,15 +131,21 @@ function load_mailbox(mailbox) {
                 document.querySelector('#compose-view').style.display = 'block';
                 document.querySelector('#read-view').style.display = 'none';
                 // hiding and displaying views and then setting values in the compose fields.
-                document.querySelector('#compose-recipients').value = email.recipients;
-                if (email.subject.startsWith("Re:")){
+                document.querySelector('#compose-recipients').value = email.sender;
+                if (email.subject.startsWith("Re:")) {
                   document.querySelector('#compose-subject').value = email.subject;
                 }
                 // if subject starts with Re: then don't add Re:, otherwise add it.
-                else{
-                  document.querySelector('#compose-subject').value = "Re: "+email.subject;
+                else {
+                  document.querySelector('#compose-subject').value = "Re: " + email.subject;
                 }
-                document.querySelector('#compose-body').value = "On"+email.timestamp+" "+email.sender+ " wrote: " + email.body;
+                if (email.body.startsWith("On")){
+                  document.querySelector('#compose-body').value = email.body;
+                }
+                else{
+                  document.querySelector('#compose-body').value = "On " + email.timestamp + " " + email.sender + " wrote: " + email.body;
+                }
+                
               })
               div.append(senderDiv, recipientDiv, subjectDiv, timestampDiv, replyButton, bodyDiv, archiveButton);
               read_list.append(div);
