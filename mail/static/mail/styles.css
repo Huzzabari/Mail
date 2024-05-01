@@ -44,6 +44,8 @@ textarea {
     padding-top: 100px;
 }
 
-button {
+.reply {
     margin: 10px;
+    background-color:rgb(60, 0, 255);
+    color: white;
 }
