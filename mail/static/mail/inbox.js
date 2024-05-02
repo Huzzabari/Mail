@@ -139,13 +139,11 @@ function load_mailbox(mailbox) {
                 else {
                   document.querySelector('#compose-subject').value = "Re: " + email.subject;
                 }
-                if (email.body.startsWith("On")){
-                  document.querySelector('#compose-body').value = email.body;
-                }
-                else{
-                  document.querySelector('#compose-body').value = "On " + email.timestamp + " " + email.sender + " wrote: " + email.body;
-                }
-                
+                let email_body=document.querySelector('#compose-body').value=email.body;
+                let timestampstring = "\n \n On " + email.timestamp + " " + email.recipients + " wrote: ";
+                email_body = email_body + timestampstring;
+                document.querySelector('#compose-body').value = email_body;
+
               })
               div.append(senderDiv, recipientDiv, subjectDiv, timestampDiv, replyButton, bodyDiv, archiveButton);
               read_list.append(div);
